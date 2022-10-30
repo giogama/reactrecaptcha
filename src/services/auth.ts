@@ -1,7 +1,16 @@
+import { boolean } from "yup";
 import { api } from "./api";
 
 interface IResponseLogin {
-
+    returnCode: number;
+    message: string;
+    hasError: boolean;
+    hasException: boolean;
+    errorMessage: string;
+    model: {
+        authenticated: boolean;
+        accessToken: string;
+    }
 }
 
 export const processLogin = async (): Promise<string> => {
