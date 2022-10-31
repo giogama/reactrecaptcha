@@ -1,4 +1,4 @@
-import { boolean } from "yup";
+
 import { api } from "./api";
 
 interface IResponseLogin {

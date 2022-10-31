@@ -13,7 +13,7 @@ export const isHuman = async (accessToken:string, reToken:string): Promise<boole
             headers: { Authorization: `Bearer ${accessToken}` }
         };
 
-        const response = await api.post<IResponseRecaptcha>(`${process.env.REACT_APP_SERVICE_RECAPTCHA_VALIDATE}`,
+        const response = await api.post<IResponseRecaptcha>(`${process.env.REACT_APP_SERVICE_RECAPTCHA_VALIDATE as string}`,
             JSON.stringify(
             {
                 appkey: `${process.env.REACT_APP_API_APP}`,

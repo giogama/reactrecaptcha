@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import ReCAPTCHA from "react-google-recaptcha";
 
+import { processLogin } from './services/auth';
+
 interface IFormRegisterData {
   fullname: string;
   username: string;
@@ -54,29 +56,35 @@ function App() {
     const token = current?.getValue();
     current?.reset();
 
-    console.log(token, 'token');
+    console.log(token, 'reToken');
 
-    const response = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fullname: formData.fullname,
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-        terms: formData.terms,
-        token,
-      }),
-    });
-    const data = await response.json();
+    //console.log(process.env.REACT_APP_URL_RECAPTCHA_VALIDATE as string, 'Url Validade ReCaptcha')
 
-    if (data.errors) {
-      setServerErrors(data.errors);
-    } else {
-      console.log("success, redirect to home page");
-    }
+    const accessToken = await processLogin();
+
+    console.log(accessToken);
+
+    // const response = await fetch("/api/auth", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     fullname: formData.fullname,
+    //     username: formData.username,
+    //     email: formData.email,
+    //     password: formData.password,
+    //     terms: formData.terms,
+    //     token,
+    //   }),
+    // });
+    // const data = await response.json();
+
+    // if (data.errors) {
+    //   setServerErrors(data.errors);
+    // } else {
+    //   console.log("success, redirect to home page");
+    // }
 
     setSubmitting(false);
 
