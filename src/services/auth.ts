@@ -15,12 +15,13 @@ interface IResponseLogin {
 
 export const processLogin = async (): Promise<string> => {
     try {
-        const response = await api.post<IResponseLogin>(`${process.env.REACT_APP_SERVICE_LOGIN}`,
+        
+        const response = await api.post<IResponseLogin>(`${process.env.REACT_APP_SERVICE_LOGIN as string}`,
             JSON.stringify(
             {
-                appkey: `${process.env.REACT_APP_API_APP}`,
-                userId: `${process.env.REACT_APP_USER_ID}`,
-                accessKey: `${process.env.REACT_APP_ACCESS_KEY}`
+                appkey: `${process.env.REACT_APP_API_APP as string}`,
+                userId: `${process.env.REACT_APP_USER_ID as string}`,
+                accessKey: `${process.env.REACT_APP_ACCESS_KEY as string}`
             })
         );
 
