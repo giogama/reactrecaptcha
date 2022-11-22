@@ -57,9 +57,13 @@ function App() {
     const token = current?.getValue();
     current?.reset();
 
+    //console.log('Token Recaptcha: ', token);
+
     const accessToken = await processLogin();
 
     const resultReCaptcha = await isHuman(accessToken, token as string);
+
+    //console.log('resultReCaptcha: ', resultReCaptcha);
 
     setSubmitting(false);
 
